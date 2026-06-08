@@ -1,0 +1,19 @@
+{
+  "name": "talos-protocol",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "scripts": {
+    "dev": "pnpm --dir web dev",
+    "build": "pnpm --dir web build",
+    "lint": "pnpm --dir web lint",
+    "web:install": "pnpm --dir web install",
+    "web:db:push": "pnpm --dir web db:push",
+    "web:db:seed": "pnpm --dir web db:seed"
+  },
+  "dependencies": {
+    "next": "16.2.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
