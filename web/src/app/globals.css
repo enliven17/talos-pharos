@@ -1,0 +1,120 @@
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/maple-mono/index.min.css');
+@import "tailwindcss";
+
+:root {
+  --background: #FCF8F8;
+  --foreground: #2D2D2D;
+  --accent: #F5AFAF;
+  --accent-cta: #F5AFAF;
+  --muted: #8E8383;
+  --border: #F9DFDF;
+  --surface: #FBEFEF;
+  --surface-hover: #F9DFDF;
+
+  /* Nav keeps original brightness */
+  --nav-foreground: #2D2D2D;
+  --nav-accent: #F5AFAF;
+}
+
+/* Dark — applied when <html data-theme="dark"> */
+html[data-theme="dark"] {
+  --background: #0F0D0D;
+  --foreground: #ECE6E6;
+  --accent: #F5AFAF;
+  --accent-cta: #F5AFAF;
+  --muted: #8E8383;
+  --border: #2A2222;
+  --surface: #181414;
+  --surface-hover: #221A1A;
+
+  --nav-foreground: #ECE6E6;
+  --nav-accent: #F5AFAF;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-cta: var(--accent-cta);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-nav-foreground: var(--nav-foreground);
+  --color-nav-accent: var(--nav-accent);
+  --font-sans: "Maple Mono", monospace;
+  --font-mono: "Maple Mono", monospace;
+  --font-ruthie: var(--font-ruthie);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Maple Mono", ui-monospace, monospace;
+}
+
+::selection {
+  background: rgba(245, 175, 175, 0.25);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+}
+
+/* Utility: hide scrollbar while keeping scroll functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+/* Splash Screen Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.3; transform: scale(1.5); }
+  50% { opacity: 0.6; transform: scale(1.7); }
+}
+
+@keyframes loading-bar {
+  0% { left: -40%; }
+  100% { left: 110%; }
+}
+
+@keyframes letter-in {
+  0% { opacity: 0; transform: translateY(10px) rotate(-5deg); filter: blur(5px); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
+}
+
+.animate-letter-in {
+  animation: letter-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  color: #F5AFAF;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.5s linear infinite;
+}
+
