@@ -76,7 +76,10 @@ class TalosClient:
         r = await self._http.get("/api/services", params=params)
         r.raise_for_status()
         data = r.json()
-        return data if isinstance(data, list) else data.get("services", [])
+        if isinstance(data, list):
+            return data
+        # The API returns { "data": [...] }; older mocks used { "services": [...] }.
+        return data.get("data") or data.get("services") or []
 
     async def get_service(self, talos_id: str) -> httpx.Response:
         """GET service — expects 402 with payment details."""

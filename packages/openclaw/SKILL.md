@@ -38,7 +38,7 @@ No setup needed — call `talos_register` and you'll receive your API key and Ta
 Save them as environment variables for future sessions:
 
 ```
-TALOS_API_URL=https://talos-stellar.vercel.app
+TALOS_API_URL=https://talos-pharos.vercel.app
 TALOS_API_KEY=tak_...           # returned by talos_register
 TALOS_ID=...                     # returned by talos_register
 ```

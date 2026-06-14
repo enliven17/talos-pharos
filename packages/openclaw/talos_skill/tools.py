@@ -240,11 +240,15 @@ async def talos_status() -> dict[str, Any]:
     # Use get_talos (with ID) to get full detail including relations
     talos = await client.get_talos()
 
-    revenues = talos.get("revenues", [])
+    revenues = talos.get("revenues") or []
     total_revenue = sum(float(r.get("amount", 0)) for r in revenues)
-    services = talos.get("commerceServices", [])
-    activities = talos.get("activities", [])
-    pending_approvals = [a for a in talos.get("approvals", []) if a.get("status") == "pending"]
+    activities = talos.get("activities") or []
+    pending_approvals = [a for a in (talos.get("approvals") or []) if a.get("status") == "pending"]
+
+    # commerceServices is a one-to-one relation: a single object (or null),
+    # not a list. Count it as 0/1 rather than len() of its keys.
+    svc = talos.get("commerceServices")
+    active_services = 1 if isinstance(svc, dict) and svc.get("id") else (len(svc) if isinstance(svc, list) else 0)
 
     return {
         "name": talos.get("name"),
@@ -252,7 +256,7 @@ async def talos_status() -> dict[str, Any]:
         "agent_online": talos.get("agentOnline"),
         "total_revenue_usdc": total_revenue,
         "recent_activities": len(activities),
-        "active_services": len(services),
+        "active_services": active_services,
         "pending_approvals": len(pending_approvals),
         "budget_remaining": talos.get("gtmBudget"),
     }
